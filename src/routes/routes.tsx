@@ -1,6 +1,6 @@
 // Dependencies
 import { lazy } from "react";
-import type { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 // Components

@@ -2,7 +2,8 @@
 import styled, { css } from "styled-components";
 
 // Types
-import type { ButtonVariants } from "./button.types";
+import { theme } from "@/styles/theme";
+import { ButtonVariants } from "./button.types";
 
 type ContainerStyleProps = {
     variant: ButtonVariants;
@@ -13,7 +14,23 @@ type ContainerStyleProps = {
 
 export const Container = styled.button<ContainerStyleProps>`
     background-color: inherit;
-    padding: 8px;
+    padding: ${theme.system.space.xxxxs};
+    border-radius: ${theme.system.radii.full};
+
+    ${({ isCommingSoon }) =>
+        !!isCommingSoon &&
+        css`
+            background-color: ${theme.palette.colors["gray200"]};
+            color: ${theme.palette.colors["gray500"]};
+        `};
+
+    ${({ isCommingSoon, variant }) =>
+        !isCommingSoon &&
+        variant === "dark-cta" &&
+        css`
+            background-color: ${theme.palette.colors["warning500"]};
+            color: ${theme.palette.colors["white"]};
+        `};
 `;
 
 export const Label = styled.p`

@@ -1,9 +1,9 @@
 // Dependencies
-import { InsHTMLAttributes } from "react";
+import { ButtonHTMLAttributes } from "react";
 
 export type ButtonVariants = "light-cta" | "dark-cta" | "link";
 
-export type ButtonData = InsHTMLAttributes<HTMLButtonElement> & {
+export type ButtonData = ButtonHTMLAttributes<HTMLButtonElement> & {
     label: string;
     isActive?: boolean;
     isCommingSoon?: boolean;

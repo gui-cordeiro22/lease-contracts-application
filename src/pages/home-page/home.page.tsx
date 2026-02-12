@@ -1,5 +1,6 @@
 // Dependencies
 import { FunctionComponent } from "react";
+import { useForm } from "react-hook-form";
 
 // Page
 import { HomePage } from "@/components/pages/home-page";
@@ -8,8 +9,23 @@ import { HomePage } from "@/components/pages/home-page";
 import { Typography } from "@/components/utilities/typography";
 import { HeroSection } from "@/components/sections/hero";
 import { FormSection } from "@/components/sections/form-section";
+import { Form, FormResponseData } from "@/components/compositions/form";
+import { Button } from "@/components/elements/button";
+import { Input } from "@/components/elements/input";
 
 export const Home: FunctionComponent = () => {
+    const { register, handleSubmit } = useForm<FormResponseData>({
+        defaultValues: {
+            tenantName: "",
+            tenantCpf: "",
+            rentalPrice: "",
+            expirationDate: "",
+        },
+    });
+
+    const handleLeaseContractGenerate = (data: FormResponseData) => {
+        console.log(data);
+    };
     return (
         <HomePage
             heroSectionCompositions={
@@ -42,7 +58,48 @@ export const Home: FunctionComponent = () => {
                             variant="titleMedium"
                         />
                     }
-                    formSectionCompositions={<div>Formulário</div>}
+                    formSectionCompositions={
+                        <Form
+                            handleSubmitForm={handleSubmit(
+                                handleLeaseContractGenerate,
+                            )}
+                            tenantNameInputElement={
+                                <Input
+                                    {...register("tenantName")}
+                                    type="text"
+                                    placeholder="teste"
+                                />
+                            }
+                            tenantCpfInputElement={
+                                <Input
+                                    {...register("tenantCpf")}
+                                    type="text"
+                                    placeholder="teste"
+                                />
+                            }
+                            rentalPriceInputElement={
+                                <Input
+                                    {...register("rentalPrice")}
+                                    type="text"
+                                    placeholder="teste"
+                                />
+                            }
+                            expirationDateInputElement={
+                                <Input
+                                    {...register("expirationDate")}
+                                    type="text"
+                                    placeholder="teste"
+                                />
+                            }
+                            actionButtonElement={
+                                <Button
+                                    label="Gerar contrato"
+                                    type="submit"
+                                    variant="dark-cta"
+                                />
+                            }
+                        />
+                    }
                 />
             }
         />
