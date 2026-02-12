@@ -2,7 +2,7 @@
 import { ReactNode } from "react";
 
 export type FormSectionElement = {
-    titleSectionElement?: string;
+    titleSectionElement?: ReactNode;
     formSectionCompositions: ReactNode;
 };
 

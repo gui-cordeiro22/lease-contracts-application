@@ -5,8 +5,9 @@ import { FunctionComponent } from "react";
 import { HomePage } from "@/components/pages/home-page";
 
 // Components
-import { HeroSection } from "@/components/sections/hero";
 import { Typography } from "@/components/utilities/typography";
+import { HeroSection } from "@/components/sections/hero";
+import { FormSection } from "@/components/sections/form-section";
 
 export const Home: FunctionComponent = () => {
     return (
@@ -29,6 +30,19 @@ export const Home: FunctionComponent = () => {
                             text="Preencha os dados do formulário abaixo para que o contrato de locação do imóvel seja gerado automáticamente:"
                         />
                     }
+                />
+            }
+            formSectionCompositions={
+                <FormSection
+                    titleSectionElement={
+                        <Typography
+                            element="h3"
+                            text="Contrato de locação"
+                            color="black"
+                            variant="titleMedium"
+                        />
+                    }
+                    formSectionCompositions={<div>Formulário</div>}
                 />
             }
         />
