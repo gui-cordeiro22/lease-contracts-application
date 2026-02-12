@@ -13,6 +13,9 @@ import { Form, FormResponseData } from "@/components/compositions/form";
 import { Button } from "@/components/elements/button";
 import { Input } from "@/components/elements/input";
 
+// Stores
+import { contractGenerate } from "./home.stores";
+
 export const Home: FunctionComponent = () => {
     const { register, handleSubmit } = useForm<FormResponseData>({
         defaultValues: {
@@ -23,8 +26,8 @@ export const Home: FunctionComponent = () => {
         },
     });
 
-    const handleLeaseContractGenerate = (data: FormResponseData) => {
-        console.log(data);
+    const handleLeaseContractGenerate = async (data: FormResponseData) => {
+        contractGenerate(data);
     };
     return (
         <HomePage
