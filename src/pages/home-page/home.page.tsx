@@ -1,5 +1,5 @@
 // Dependencies
-import { FunctionComponent } from "react";
+import { Fragment, FunctionComponent, useState } from "react";
 import { useForm } from "react-hook-form";
 
 // Page
@@ -12,12 +12,19 @@ import { FormSection } from "@/components/sections/form-section";
 import { Form, FormResponseData } from "@/components/compositions/form";
 import { Button } from "@/components/elements/button";
 import { Input } from "@/components/elements/input";
+import { ConditionallyRender } from "@/components/utilities/conditionally-render";
+import { Loader } from "@/components/elements/loader";
+
+// Assets
+import spinner from "@/assets/svg/spinner.svg";
 
 // Stores
 import { contractGenerate } from "./home.stores";
 
 export const Home: FunctionComponent = () => {
-    const { register, handleSubmit } = useForm<FormResponseData>({
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { register, handleSubmit, reset } = useForm<FormResponseData>({
         defaultValues: {
             tenantName: "",
             tenantCpf: "",
@@ -27,7 +34,17 @@ export const Home: FunctionComponent = () => {
     });
 
     const handleLeaseContractGenerate = async (data: FormResponseData) => {
-        contractGenerate(data);
+        try {
+            setIsLoading(true);
+            await contractGenerate(data);
+        } catch (error) {
+            console.error({ message: error });
+
+            throw new Error();
+        } finally {
+            reset();
+            setIsLoading(false);
+        }
     };
     return (
         <HomePage
@@ -70,33 +87,62 @@ export const Home: FunctionComponent = () => {
                                 <Input
                                     {...register("tenantName")}
                                     type="text"
-                                    placeholder="teste"
+                                    placeholder="Nome do locatário"
                                 />
                             }
                             tenantCpfInputElement={
                                 <Input
                                     {...register("tenantCpf")}
                                     type="text"
-                                    placeholder="teste"
+                                    placeholder="CPF do locatário"
                                 />
                             }
                             rentalPriceInputElement={
                                 <Input
                                     {...register("rentalPrice")}
                                     type="text"
-                                    placeholder="teste"
+                                    placeholder="Valor do aluguel"
                                 />
                             }
                             expirationDateInputElement={
                                 <Input
                                     {...register("expirationDate")}
                                     type="text"
-                                    placeholder="teste"
+                                    placeholder="Data de vencimento do aluguel"
                                 />
                             }
                             actionButtonElement={
                                 <Button
-                                    label="Gerar contrato"
+                                    labelElement={
+                                        <Fragment>
+                                            <ConditionallyRender
+                                                shouldRender={!!isLoading}
+                                                content={
+                                                    <Loader
+                                                        iconSource={spinner}
+                                                        labelElement={
+                                                            <Typography
+                                                                color="white"
+                                                                variant="bodyLarge"
+                                                                text="Gerando o seu contrato"
+                                                            />
+                                                        }
+                                                    />
+                                                }
+                                            />
+
+                                            <ConditionallyRender
+                                                shouldRender={!isLoading}
+                                                content={
+                                                    <Typography
+                                                        color="white"
+                                                        variant="bodyLarge"
+                                                        text="Gerar contrato"
+                                                    />
+                                                }
+                                            />
+                                        </Fragment>
+                                    }
                                     type="submit"
                                     variant="dark-cta"
                                 />

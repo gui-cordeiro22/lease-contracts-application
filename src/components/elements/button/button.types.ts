@@ -1,18 +1,21 @@
 // Dependencies
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
 export type ButtonVariants = "light-cta" | "dark-cta" | "link";
 
 export type ButtonData = ButtonHTMLAttributes<HTMLButtonElement> & {
-    label: string;
     isActive?: boolean;
     isCommingSoon?: boolean;
     variant: ButtonVariants;
     hasHoverEffect?: boolean;
 };
 
+export type ButtonElement = {
+    labelElement: ReactNode;
+};
+
 export type ButtonAction = {
     handleClick?: () => void;
 };
 
-export type ButtonProps = ButtonData & ButtonAction;
+export type ButtonProps = ButtonData & ButtonElement & ButtonAction;

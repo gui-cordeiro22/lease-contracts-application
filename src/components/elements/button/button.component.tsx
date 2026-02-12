@@ -2,13 +2,13 @@
 import { FunctionComponent } from "react";
 
 // Styles
-import { Container, Label } from "./button.styles";
+import { Container } from "./button.styles";
 
 // Types
 import { ButtonProps } from "./button.types";
 
 export const Button: FunctionComponent<ButtonProps> = ({
-    label,
+    labelElement,
     handleClick,
     variant,
     isActive,
@@ -25,7 +25,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
             isCommingSoon={!!isCommingSoon}
             hasHoverEffect={!!hasHoverEffect}
         >
-            <Label>{!!isCommingSoon ? "Em breve..." : label}</Label>
+            {labelElement}
         </Container>
     );
 };
