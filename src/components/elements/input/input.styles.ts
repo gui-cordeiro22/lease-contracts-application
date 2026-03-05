@@ -1,5 +1,5 @@
 // Dependencies
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // Styles
 import { theme } from "@/styles/theme";
@@ -14,23 +14,40 @@ export const Container = styled.div`
 
 export const ContentWrapper = styled.div`
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     width: 100%;
     max-width: 1440px;
+    gap: ${theme.system.space.nano};
 `;
 
-export const InputElementWrapper = styled.div`
+type InputElementWrapperStyleProps = {
+    hasError: boolean;
+};
+
+export const InputElementWrapper = styled.div<InputElementWrapperStyleProps>`
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
     gap: ${theme.system.space["xxxxs"]};
-    border: 1px solid ${theme.palette.colors["gray200"]};
     border-radius: ${theme.system.radii["md"]};
     padding: 12px;
     width: 100%;
+    transition: all 0.2s ease-in;
+
+    ${({ hasError }) =>
+        !!hasError &&
+        css`
+            border: 1px solid ${theme.palette.colors["danger300"]};
+        `}
+
+    ${({ hasError }) =>
+        !hasError &&
+        css`
+            border: 1px solid ${theme.palette.colors["gray200"]};
+        `}
 `;
 
 export const InputElement = styled.input`

@@ -99,54 +99,81 @@ export const Home: FunctionComponent = () => {
                             )}
                             tenantNameInputElement={
                                 <Input
-                                    {...register("tenantName", {
-                                        required: true,
-                                    })}
+                                    {...register("tenantName")}
                                     type="text"
                                     placeholder="Nome do locatário"
-                                    {...(formState.errors.tenantName
-                                        ?.message && {
-                                        errorMessage: `${formState.errors.tenantName?.message}`,
-                                    })}
+                                    errorMessage={
+                                        formState.errors.tenantName
+                                            ?.message && (
+                                            <Typography
+                                                text={
+                                                    formState.errors.tenantName
+                                                        .message
+                                                }
+                                                color="danger300"
+                                                variant="microcopy"
+                                            />
+                                        )
+                                    }
                                 />
                             }
                             tenantCpfInputElement={
                                 <Input
-                                    {...register("tenantCpf", {
-                                        required: true,
-                                    })}
+                                    {...register("tenantCpf")}
                                     type="text"
                                     placeholder="CPF do locatário"
-                                    {...(formState.errors.tenantName
-                                        ?.message && {
-                                        errorMessage: `${formState.errors.tenantCpf?.message}`,
-                                    })}
+                                    errorMessage={
+                                        formState.errors.tenantCpf?.message && (
+                                            <Typography
+                                                text={
+                                                    formState.errors.tenantCpf
+                                                        .message
+                                                }
+                                                color="danger300"
+                                                variant="microcopy"
+                                            />
+                                        )
+                                    }
                                 />
                             }
                             rentalPriceInputElement={
                                 <Input
-                                    {...register("rentalPrice", {
-                                        required: true,
-                                    })}
+                                    {...register("rentalPrice")}
                                     type="text"
                                     placeholder="Valor do aluguel"
-                                    {...(formState.errors.tenantName
-                                        ?.message && {
-                                        errorMessage: `${formState.errors.rentalPrice?.message}`,
-                                    })}
+                                    errorMessage={
+                                        formState.errors.rentalPrice
+                                            ?.message && (
+                                            <Typography
+                                                text={
+                                                    formState.errors.rentalPrice
+                                                        .message
+                                                }
+                                                color="danger300"
+                                                variant="microcopy"
+                                            />
+                                        )
+                                    }
                                 />
                             }
                             expirationDateInputElement={
                                 <Input
-                                    {...register("expirationDate", {
-                                        required: true,
-                                    })}
+                                    {...register("expirationDate")}
                                     type="text"
                                     placeholder="Data de vencimento do aluguel"
-                                    {...(formState.errors.tenantName
-                                        ?.message && {
-                                        errorMessage: `${formState.errors.expirationDate?.message}`,
-                                    })}
+                                    errorMessage={
+                                        formState.errors.expirationDate
+                                            ?.message && (
+                                            <Typography
+                                                text={
+                                                    formState.errors
+                                                        .expirationDate.message
+                                                }
+                                                color="danger300"
+                                                variant="microcopy"
+                                            />
+                                        )
+                                    }
                                 />
                             }
                             actionButtonElement={
