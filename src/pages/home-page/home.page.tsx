@@ -1,6 +1,7 @@
 // Dependencies
 import { Fragment, FunctionComponent, useState } from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // Page
 import { HomePage } from "@/components/pages/home-page";
@@ -21,17 +22,28 @@ import spinner from "@/assets/svg/spinner.svg";
 // Stores
 import { contractGenerate } from "./home.stores";
 
+// Schemas
+import { formSchemas } from "@/components/compositions/form/form.schemas";
+
+// Hooks
+import { useWindowDimensions } from "@/hooks/window-dimensions";
+
 export const Home: FunctionComponent = () => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const { register, handleSubmit, reset } = useForm<FormResponseData>({
-        defaultValues: {
-            tenantName: "",
-            tenantCpf: "",
-            rentalPrice: "",
-            expirationDate: "",
-        },
-    });
+    const { width } = useWindowDimensions();
+
+    const { register, handleSubmit, reset, formState } =
+        useForm<FormResponseData>({
+            resolver: zodResolver(formSchemas),
+            mode: "onChange",
+            defaultValues: {
+                tenantName: "",
+                tenantCpf: "",
+                rentalPrice: "",
+                expirationDate: "",
+            },
+        });
 
     const handleLeaseContractGenerate = async (data: FormResponseData) => {
         try {
@@ -54,7 +66,7 @@ export const Home: FunctionComponent = () => {
                         <Typography
                             element="h1"
                             color="black"
-                            variant="titleLarge"
+                            variant={width >= 1024 ? "display" : "titleLarge"}
                             text="Emissor de contratos de aluguel"
                         />
                     }
@@ -62,7 +74,7 @@ export const Home: FunctionComponent = () => {
                         <Typography
                             element="p"
                             color="black"
-                            variant="bodyMedium"
+                            variant={width >= 1024 ? "bodyLarge" : "bodyMedium"}
                             text="Preencha os dados do formulário abaixo para que o contrato de locação do imóvel seja gerado automáticamente:"
                         />
                     }
@@ -75,7 +87,9 @@ export const Home: FunctionComponent = () => {
                             element="h3"
                             text="Contrato de locação"
                             color="black"
-                            variant="titleMedium"
+                            variant={
+                                width >= 1024 ? "titleLarge" : "titleMedium"
+                            }
                         />
                     }
                     formSectionCompositions={
@@ -83,11 +97,31 @@ export const Home: FunctionComponent = () => {
                             handleSubmitForm={handleSubmit(
                                 handleLeaseContractGenerate,
                             )}
+                            tenantInformationsSectionTitleElement={
+                                <Typography
+                                    text="Informações do locatário:"
+                                    color="gray300"
+                                    variant="bodyMedium"
+                                />
+                            }
                             tenantNameInputElement={
                                 <Input
                                     {...register("tenantName")}
                                     type="text"
                                     placeholder="Nome do locatário"
+                                    errorMessage={
+                                        formState.errors.tenantName
+                                            ?.message && (
+                                            <Typography
+                                                text={
+                                                    formState.errors.tenantName
+                                                        .message
+                                                }
+                                                color="danger300"
+                                                variant="microcopy"
+                                            />
+                                        )
+                                    }
                                 />
                             }
                             tenantCpfInputElement={
@@ -95,6 +129,25 @@ export const Home: FunctionComponent = () => {
                                     {...register("tenantCpf")}
                                     type="text"
                                     placeholder="CPF do locatário"
+                                    errorMessage={
+                                        formState.errors.tenantCpf?.message && (
+                                            <Typography
+                                                text={
+                                                    formState.errors.tenantCpf
+                                                        .message
+                                                }
+                                                color="danger300"
+                                                variant="microcopy"
+                                            />
+                                        )
+                                    }
+                                />
+                            }
+                            propertyInformationsSectionTitleElement={
+                                <Typography
+                                    text="Informações da propriedade:"
+                                    color="gray300"
+                                    variant="bodyMedium"
                                 />
                             }
                             rentalPriceInputElement={
@@ -102,6 +155,19 @@ export const Home: FunctionComponent = () => {
                                     {...register("rentalPrice")}
                                     type="text"
                                     placeholder="Valor do aluguel"
+                                    errorMessage={
+                                        formState.errors.rentalPrice
+                                            ?.message && (
+                                            <Typography
+                                                text={
+                                                    formState.errors.rentalPrice
+                                                        .message
+                                                }
+                                                color="danger300"
+                                                variant="microcopy"
+                                            />
+                                        )
+                                    }
                                 />
                             }
                             expirationDateInputElement={
@@ -109,10 +175,24 @@ export const Home: FunctionComponent = () => {
                                     {...register("expirationDate")}
                                     type="text"
                                     placeholder="Data de vencimento do aluguel"
+                                    errorMessage={
+                                        formState.errors.expirationDate
+                                            ?.message && (
+                                            <Typography
+                                                text={
+                                                    formState.errors
+                                                        .expirationDate.message
+                                                }
+                                                color="danger300"
+                                                variant="microcopy"
+                                            />
+                                        )
+                                    }
                                 />
                             }
                             actionButtonElement={
                                 <Button
+                                    isActive={formState.isValid}
                                     labelElement={
                                         <Fragment>
                                             <ConditionallyRender
@@ -124,7 +204,7 @@ export const Home: FunctionComponent = () => {
                                                             <Typography
                                                                 color="white"
                                                                 variant="bodyLarge"
-                                                                text="Gerando o seu contrato"
+                                                                text="Gerando o seu contrato..."
                                                             />
                                                         }
                                                     />

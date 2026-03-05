@@ -11,12 +11,14 @@
         "prepare": "husky install"
     },
     "dependencies": {
+        "@hookform/resolvers": "^5.2.2",
         "axios": "^1.13.5",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
         "react-hook-form": "^7.71.1",
         "react-router-dom": "^7.13.0",
-        "styled-components": "^6.3.9"
+        "styled-components": "^6.3.9",
+        "zod": "^4.3.6"
     },
     "devDependencies": {
         "@commitlint/cli": "17.1.2",

@@ -31,14 +31,12 @@ export const Container = styled.button<ContainerStyleProps>`
             background-color: ${theme.palette.colors["warning500"]};
             color: ${theme.palette.colors["white"]};
         `};
-`;
 
-export const Label = styled.p`
-    font-size: 14px;
-    font-family: "Ubuntu", sans-serif;
-    font-weight: bold;
-
-    @media (min-width: 768px) {
-        font-size: 16px;
-    }
+    ${({ isActive }) =>
+        !isActive &&
+        css`
+            background-color: ${theme.palette.colors["gray200"]};
+            color: ${theme.palette.colors["white"]};
+            cursor: not-allowed;
+        `}
 `;
