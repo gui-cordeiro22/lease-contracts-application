@@ -1,6 +1,9 @@
 // Dependencies
 import styled from "styled-components";
 
+// Styles
+import { theme } from "@/styles/theme";
+
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -23,14 +26,11 @@ export const InputElementWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
-    gap: 8px;
-    border-radius: 8px;
+    gap: ${theme.system.space["xxxxs"]};
+    border: 1px solid ${theme.palette.colors["gray200"]};
+    border-radius: ${theme.system.radii["md"]};
     padding: 12px;
     width: 100%;
-
-    @media (min-width: 768px) {
-        width: 280px;
-    }
 `;
 
 export const InputElement = styled.input`

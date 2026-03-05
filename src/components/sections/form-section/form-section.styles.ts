@@ -20,6 +20,10 @@ export const ContentWrapper = styled.div`
     justify-content: center;
 
     ${pageGutter}
+
+    @media(min-width: 1024px) {
+        align-items: center;
+    }
 `;
 
 export const Card = styled.div`
@@ -28,8 +32,14 @@ export const Card = styled.div`
     align-items: flex-start;
     justify-content: center;
     width: 100%;
+    max-width: 800px;
     background-color: ${theme.palette.colors.white};
-    padding: ${theme.system.space.xxs};
+    padding: ${theme.system.space.xs};
     border-radius: ${theme.system.radii.md};
     gap: ${theme.system.space.xxxs};
+
+    @media (min-width: 1024px) {
+        padding: ${theme.system.space.xl};
+        gap: ${theme.system.space.xl};
+    }
 `;

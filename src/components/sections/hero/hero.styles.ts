@@ -29,4 +29,8 @@ export const TextWrapper = styled.section`
     justify-content: center;
     width: 100%;
     gap: ${theme.system.space.sm};
+
+    @media (min-width: 1024px) {
+        align-items: center;
+    }
 `;

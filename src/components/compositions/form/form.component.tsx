@@ -1,8 +1,16 @@
 // Dependencies
 import { FunctionComponent } from "react";
 
+// Components
+import { ConditionallyRender } from "@/components/utilities/conditionally-render";
+
 // Styles
-import { ButtonWrapper, Container } from "./form.styles";
+import {
+    ButtonWrapper,
+    Container,
+    InputSectionTitle,
+    InputWrapper,
+} from "./form.styles";
 
 // Types
 import { FormProps } from "./form.types";
@@ -17,13 +25,35 @@ export const Form: FunctionComponent<FormProps> = ({
 }) => {
     return (
         <Container onSubmit={handleSubmitForm}>
-            {tenantNameInputElement}
+            <InputWrapper>
+                <ConditionallyRender
+                    minimumBreakpoint="tabletAuxiliary"
+                    content={
+                        <InputSectionTitle>
+                            Informações do locatário
+                        </InputSectionTitle>
+                    }
+                />
 
-            {tenantCpfInputElement}
+                {tenantNameInputElement}
 
-            {rentalPriceInputElement}
+                {tenantCpfInputElement}
+            </InputWrapper>
 
-            {expirationDateInputElement}
+            <InputWrapper>
+                <ConditionallyRender
+                    minimumBreakpoint="tabletAuxiliary"
+                    content={
+                        <InputSectionTitle>
+                            Informações da propriedade
+                        </InputSectionTitle>
+                    }
+                />
+
+                {rentalPriceInputElement}
+
+                {expirationDateInputElement}
+            </InputWrapper>
 
             <ButtonWrapper>{actionButtonElement}</ButtonWrapper>
         </Container>

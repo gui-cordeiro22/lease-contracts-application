@@ -20,9 +20,12 @@ import spinner from "@/assets/svg/spinner.svg";
 
 // Stores
 import { contractGenerate } from "./home.stores";
+import { useWindowDimensions } from "@/hooks/window-dimensions";
 
 export const Home: FunctionComponent = () => {
     const [isLoading, setIsLoading] = useState(false);
+
+    const { width } = useWindowDimensions();
 
     const { register, handleSubmit, reset, formState } =
         useForm<FormResponseData>({
@@ -34,8 +37,6 @@ export const Home: FunctionComponent = () => {
             },
             mode: "onChange",
         });
-
-    console.log(formState.isValid);
 
     const handleLeaseContractGenerate = async (data: FormResponseData) => {
         try {
@@ -58,7 +59,7 @@ export const Home: FunctionComponent = () => {
                         <Typography
                             element="h1"
                             color="black"
-                            variant="titleLarge"
+                            variant={width >= 1024 ? "display" : "titleLarge"}
                             text="Emissor de contratos de aluguel"
                         />
                     }
@@ -66,7 +67,7 @@ export const Home: FunctionComponent = () => {
                         <Typography
                             element="p"
                             color="black"
-                            variant="bodyMedium"
+                            variant={width >= 1024 ? "bodyLarge" : "bodyMedium"}
                             text="Preencha os dados do formulário abaixo para que o contrato de locação do imóvel seja gerado automáticamente:"
                         />
                     }
@@ -79,7 +80,9 @@ export const Home: FunctionComponent = () => {
                             element="h3"
                             text="Contrato de locação"
                             color="black"
-                            variant="titleMedium"
+                            variant={
+                                width >= 1024 ? "titleLarge" : "titleMedium"
+                            }
                         />
                     }
                     formSectionCompositions={
@@ -137,7 +140,7 @@ export const Home: FunctionComponent = () => {
                                                             <Typography
                                                                 color="white"
                                                                 variant="bodyLarge"
-                                                                text="Gerando o seu contrato"
+                                                                text="Gerando o seu contrato..."
                                                             />
                                                         }
                                                     />
