@@ -1,6 +1,7 @@
 // Dependencies
 import { Fragment, FunctionComponent, useState } from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // Page
 import { HomePage } from "@/components/pages/home-page";
@@ -20,6 +21,11 @@ import spinner from "@/assets/svg/spinner.svg";
 
 // Stores
 import { contractGenerate } from "./home.stores";
+
+// Schemas
+import { formSchemas } from "@/components/compositions/form/form.schemas";
+
+// Hooks
 import { useWindowDimensions } from "@/hooks/window-dimensions";
 
 export const Home: FunctionComponent = () => {
@@ -29,13 +35,14 @@ export const Home: FunctionComponent = () => {
 
     const { register, handleSubmit, reset, formState } =
         useForm<FormResponseData>({
+            resolver: zodResolver(formSchemas),
+            mode: "onChange",
             defaultValues: {
                 tenantName: "",
                 tenantCpf: "",
                 rentalPrice: "",
                 expirationDate: "",
             },
-            mode: "onChange",
         });
 
     const handleLeaseContractGenerate = async (data: FormResponseData) => {
@@ -97,6 +104,10 @@ export const Home: FunctionComponent = () => {
                                     })}
                                     type="text"
                                     placeholder="Nome do locatário"
+                                    {...(formState.errors.tenantName
+                                        ?.message && {
+                                        errorMessage: `${formState.errors.tenantName?.message}`,
+                                    })}
                                 />
                             }
                             tenantCpfInputElement={
@@ -106,6 +117,10 @@ export const Home: FunctionComponent = () => {
                                     })}
                                     type="text"
                                     placeholder="CPF do locatário"
+                                    {...(formState.errors.tenantName
+                                        ?.message && {
+                                        errorMessage: `${formState.errors.tenantCpf?.message}`,
+                                    })}
                                 />
                             }
                             rentalPriceInputElement={
@@ -115,6 +130,10 @@ export const Home: FunctionComponent = () => {
                                     })}
                                     type="text"
                                     placeholder="Valor do aluguel"
+                                    {...(formState.errors.tenantName
+                                        ?.message && {
+                                        errorMessage: `${formState.errors.rentalPrice?.message}`,
+                                    })}
                                 />
                             }
                             expirationDateInputElement={
@@ -124,6 +143,10 @@ export const Home: FunctionComponent = () => {
                                     })}
                                     type="text"
                                     placeholder="Data de vencimento do aluguel"
+                                    {...(formState.errors.tenantName
+                                        ?.message && {
+                                        errorMessage: `${formState.errors.expirationDate?.message}`,
+                                    })}
                                 />
                             }
                             actionButtonElement={
