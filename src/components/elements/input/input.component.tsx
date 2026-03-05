@@ -8,6 +8,7 @@ import { ConditionallyRender } from "@/components/utilities/conditionally-render
 import {
     Container,
     ContentWrapper,
+    ErrorMessageWrapper,
     IconElement,
     InputElement,
     InputElementWrapper,
@@ -40,7 +41,7 @@ export const Input: FunctionComponent<InputProps> = ({
                     />
                 </InputElementWrapper>
 
-                {errorMessage}
+                <ErrorMessageWrapper>{errorMessage}</ErrorMessageWrapper>
             </ContentWrapper>
         </Container>
     );

@@ -16,7 +16,7 @@ export const Container = styled.section`
 export const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
 
     ${pageGutter}
@@ -29,7 +29,7 @@ export const ContentWrapper = styled.div`
 export const Card = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     width: 100%;
     max-width: 800px;
