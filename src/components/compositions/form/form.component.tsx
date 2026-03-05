@@ -16,8 +16,10 @@ import {
 import { FormProps } from "./form.types";
 
 export const Form: FunctionComponent<FormProps> = ({
+    tenantInformationsSectionTitleElement,
     tenantNameInputElement,
     tenantCpfInputElement,
+    propertyInformationsSectionTitleElement,
     rentalPriceInputElement,
     expirationDateInputElement,
     actionButtonElement,
@@ -30,7 +32,7 @@ export const Form: FunctionComponent<FormProps> = ({
                     minimumBreakpoint="tabletAuxiliary"
                     content={
                         <InputSectionTitle>
-                            Informações do locatário
+                            {tenantInformationsSectionTitleElement}
                         </InputSectionTitle>
                     }
                 />
@@ -45,7 +47,7 @@ export const Form: FunctionComponent<FormProps> = ({
                     minimumBreakpoint="tabletAuxiliary"
                     content={
                         <InputSectionTitle>
-                            Informações da propriedade
+                            {propertyInformationsSectionTitleElement}
                         </InputSectionTitle>
                     }
                 />

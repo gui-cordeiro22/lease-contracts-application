@@ -2,8 +2,10 @@
 import { ReactNode } from "react";
 
 export type FormElements = {
+    tenantInformationsSectionTitleElement: ReactNode;
     tenantNameInputElement: ReactNode;
     tenantCpfInputElement: ReactNode;
+    propertyInformationsSectionTitleElement: ReactNode;
     rentalPriceInputElement: ReactNode;
     expirationDateInputElement: ReactNode;
     actionButtonElement: ReactNode;

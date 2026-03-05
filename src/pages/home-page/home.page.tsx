@@ -97,6 +97,13 @@ export const Home: FunctionComponent = () => {
                             handleSubmitForm={handleSubmit(
                                 handleLeaseContractGenerate,
                             )}
+                            tenantInformationsSectionTitleElement={
+                                <Typography
+                                    text="Informações do locatário:"
+                                    color="gray300"
+                                    variant="bodyMedium"
+                                />
+                            }
                             tenantNameInputElement={
                                 <Input
                                     {...register("tenantName")}
@@ -134,6 +141,13 @@ export const Home: FunctionComponent = () => {
                                             />
                                         )
                                     }
+                                />
+                            }
+                            propertyInformationsSectionTitleElement={
+                                <Typography
+                                    text="Informações da propriedade:"
+                                    color="gray300"
+                                    variant="bodyMedium"
                                 />
                             }
                             rentalPriceInputElement={
