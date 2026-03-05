@@ -24,14 +24,18 @@ import { contractGenerate } from "./home.stores";
 export const Home: FunctionComponent = () => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const { register, handleSubmit, reset } = useForm<FormResponseData>({
-        defaultValues: {
-            tenantName: "",
-            tenantCpf: "",
-            rentalPrice: "",
-            expirationDate: "",
-        },
-    });
+    const { register, handleSubmit, reset, formState } =
+        useForm<FormResponseData>({
+            defaultValues: {
+                tenantName: "",
+                tenantCpf: "",
+                rentalPrice: "",
+                expirationDate: "",
+            },
+            mode: "onChange",
+        });
+
+    console.log(formState.isValid);
 
     const handleLeaseContractGenerate = async (data: FormResponseData) => {
         try {
@@ -85,34 +89,43 @@ export const Home: FunctionComponent = () => {
                             )}
                             tenantNameInputElement={
                                 <Input
-                                    {...register("tenantName")}
+                                    {...register("tenantName", {
+                                        required: true,
+                                    })}
                                     type="text"
                                     placeholder="Nome do locatário"
                                 />
                             }
                             tenantCpfInputElement={
                                 <Input
-                                    {...register("tenantCpf")}
+                                    {...register("tenantCpf", {
+                                        required: true,
+                                    })}
                                     type="text"
                                     placeholder="CPF do locatário"
                                 />
                             }
                             rentalPriceInputElement={
                                 <Input
-                                    {...register("rentalPrice")}
+                                    {...register("rentalPrice", {
+                                        required: true,
+                                    })}
                                     type="text"
                                     placeholder="Valor do aluguel"
                                 />
                             }
                             expirationDateInputElement={
                                 <Input
-                                    {...register("expirationDate")}
+                                    {...register("expirationDate", {
+                                        required: true,
+                                    })}
                                     type="text"
                                     placeholder="Data de vencimento do aluguel"
                                 />
                             }
                             actionButtonElement={
                                 <Button
+                                    isActive={formState.isValid}
                                     labelElement={
                                         <Fragment>
                                             <ConditionallyRender
