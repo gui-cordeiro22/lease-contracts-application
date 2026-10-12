@@ -17,7 +17,7 @@ export const contractGenerate = async (data: FormResponseData) => {
 
     const a = document.createElement("a");
     a.href = url;
-    a.download = "contrato-de-locacao.pdf";
+    a.download = `Contrato de Locação - ${data.tenantName}.pdf`;
 
     document.body.appendChild(a);
     a.click();
